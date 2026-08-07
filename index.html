@@ -222,7 +222,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
       </button>
     </div>
-    <div class="goal-note">A fresh goal between 20–50 reps is suggested automatically each day.</div>
+    <div class="goal-note">A fresh goal between 10–60 reps is suggested automatically each day.</div>
   </div>
 
   <details class="adv">
@@ -290,7 +290,7 @@ let running = false;
 let client = null;
 
 /* ---------------------------------------------------------------------
-   Daily goal: a random suggestion between 20-50, cached per calendar day
+   Daily goal: a random suggestion between 10-60, cached per calendar day
 --------------------------------------------------------------------- */
 function todayKey(){ return 'ssp-goal-' + new Date().toISOString().slice(0,10); }
 function loadGoal(){
@@ -299,7 +299,7 @@ function loadGoal(){
   document.getElementById('goalNum').innerHTML = dailyGoal + '<small>reps</small>';
 }
 function rollGoal(){
-  const v = Math.floor(Math.random()*31)+20; // 20-50 inclusive
+  const v = Math.floor(Math.random()*51)+10; // 10-60 inclusive
   localStorage.setItem(todayKey(), v);
   return v;
 }

@@ -66,7 +66,7 @@ or 3M hook, so its height can be adjusted for different users.
 `web/index.html` is a self-contained page (no build step) that:
 - lets you choose **mode** (Stretch Guide / Simon Says) and **difficulty**
   (Level 1 = 3.0 s, Level 2 = 2.0 s, Level 3 = 1.0 s reaction window),
-- shows **today's suggested goal**, a random number between 20–50 reps,
+- shows **today's suggested goal**, a random number between 10–60 reps,
   freshly picked once per day (tap the refresh icon to re-roll manually),
 - mirrors the poster's LEDs live via the "Reach Compass" diagram,
 - shows a **results screen** at the end of every session: mode, reps
@@ -120,8 +120,9 @@ keeping the exercise stress-free for older adults.
 **Simon Says** — classic growing-memory game. The poster plays back a
 sequence of light+tone flashes (one new step added each round), then waits
 for the user to reproduce it by touching pads in the same order. A wrong
-pad, or running out of time, ends the session. Each fully-repeated round
-counts as one completed rep.
+pad, or running out of time, ends the session. Every correct tap counts as
+one completed rep (not just a fully-repeated round), so progress toward the
+daily goal keeps climbing throughout each round, not only at the end of it.
 
 In both modes, reaching the day's goal ends the session with a small
 celebratory jingle from the buzzer; stopping manually (or a Simon miss)
