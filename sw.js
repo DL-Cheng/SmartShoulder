@@ -1,10 +1,13 @@
-const CACHE_NAME = 'shoulder-poster-v1';
+const CACHE_NAME = 'shoulder-poster-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
+  './icons/icon-32.png',
+  './icons/icon-180.png',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './icons/icon-512-maskable.png'
 ];
 
 self.addEventListener('install', (event) => {
