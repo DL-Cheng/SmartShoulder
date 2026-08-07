@@ -109,12 +109,13 @@ Topic prefix: `sspv1/<DEVICE_ID>/...`
 
 ## 5. How each mode works
 
-**Stretch Guide** — LEDs light one at a time in a fixed rotation (Upper-Left
-→ Upper-Right → Lower-Left → Lower-Right → repeat). The buzzer plays a
-distinct note for whichever LED is lit. The user reaches up and touches the
-matching copper pad before the difficulty timer runs out. A miss is never
-penalized — a gentle two-beep reminder plays and the poster simply moves on
-to the next position, keeping the exercise stress-free for older adults.
+**Stretch Guide** — LEDs light one at a time in a random order (never the
+same position twice in a row), covering Upper-Left, Upper-Right, Lower-Left,
+and Lower-Right. The buzzer plays a distinct note for whichever LED is lit.
+The user reaches up and touches the matching copper pad before the
+difficulty timer runs out. A miss is never penalized — a gentle two-beep
+reminder plays and the poster simply moves on to the next (random) position,
+keeping the exercise stress-free for older adults.
 
 **Simon Says** — classic growing-memory game. The poster plays back a
 sequence of light+tone flashes (one new step added each round), then waits

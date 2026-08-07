@@ -7,8 +7,9 @@
 <meta name="description" content="A gentle shoulder-stretch trainer for your wall poster.">
 <meta name="theme-color" content="#F2994A">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito+Sans:ital,wght@0,400;0,600;0,800;1,600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
@@ -62,22 +63,6 @@
   }
   .status-dot.online{background:var(--success);}
   .status-dot.offline{background:var(--alert);}
-
-  /* Reach compass */
-  .compass-card{
-    background:var(--surface);
-    border-radius:28px;
-    box-shadow:var(--shadow);
-    padding:22px 18px 18px;
-    margin-bottom:18px;
-    text-align:center;
-  }
-  .compass-label{font-size:.85rem;color:var(--text-muted);margin-bottom:6px;font-weight:600;}
-  .compass-active{font-family:'Fredoka';font-size:1.05rem;min-height:1.4em;color:var(--stretch-deep);transition:color .2s;}
-  .compass-active.simon-color{color:var(--simon-deep);}
-  #compassSvg{width:100%;max-width:270px;height:auto;margin:6px auto 0;display:block;}
-  .node-dot{transition:fill .15s, r .15s, filter .15s;}
-  .node-dot.lit{filter:drop-shadow(0 0 10px currentColor);}
 
   /* Cards */
   .card{
@@ -206,24 +191,6 @@
     <div class="status-dot" id="statusDot" title="Device status"></div>
   </header>
 
-  <div class="compass-card">
-    <div class="compass-label">Live Poster View</div>
-    <div class="compass-active" id="compassActive">Waiting to connect…</div>
-    <svg id="compassSvg" viewBox="0 0 240 240">
-      <line x1="120" y1="30" x2="120" y2="210" stroke="#F0E4D4" stroke-width="10" stroke-linecap="round"/>
-      <line x1="30" y1="120" x2="210" y2="120" stroke="#F0E4D4" stroke-width="10" stroke-linecap="round"/>
-      <circle cx="120" cy="120" r="26" fill="#FFF1DE"/>
-      <!-- node 0: Upper-Left -->
-      <circle class="node-dot" id="node0" cx="60" cy="60" r="26" fill="#F0E4D4"/>
-      <!-- node 1: Upper-Right -->
-      <circle class="node-dot" id="node1" cx="180" cy="60" r="26" fill="#F0E4D4"/>
-      <!-- node 2: Lower-Left -->
-      <circle class="node-dot" id="node2" cx="60" cy="180" r="26" fill="#F0E4D4"/>
-      <!-- node 3: Lower-Right -->
-      <circle class="node-dot" id="node3" cx="180" cy="180" r="26" fill="#F0E4D4"/>
-    </svg>
-  </div>
-
   <div class="card">
     <h2>Mode</h2>
     <div class="seg">
@@ -322,8 +289,6 @@ let dailyGoal = 20;
 let running = false;
 let client = null;
 
-const NODE_NAMES = ['Upper-Left reach','Upper-Right reach','Lower-Left reach','Lower-Right reach'];
-
 /* ---------------------------------------------------------------------
    Daily goal: a random suggestion between 20-50, cached per calendar day
 --------------------------------------------------------------------- */
@@ -351,7 +316,6 @@ function setMode(m){
   mode = m;
   document.getElementById('modeStretch').classList.toggle('active', m==='STRETCH');
   document.getElementById('modeSimon').classList.toggle('active', m==='SIMON');
-  document.getElementById('compassActive').classList.toggle('simon-color', m==='SIMON');
   sendConfig();
 }
 function setLevel(l){
@@ -457,18 +421,6 @@ function renderLiveState(data){
   running = !!data.running;
   updateStartButton();
   document.getElementById('liveCard').classList.toggle('show', running);
-
-  for (let i=0;i<4;i++){
-    const el = document.getElementById('node'+i);
-    const lit = data.activeLed === i;
-    el.classList.toggle('lit', lit);
-    el.setAttribute('fill', lit ? (data.mode==='SIMON' ? '#4C8577' : '#F2994A') : '#F0E4D4');
-  }
-  const activeEl = document.getElementById('compassActive');
-  activeEl.classList.toggle('simon-color', data.mode==='SIMON');
-  activeEl.textContent = (data.activeLed>=0 && data.activeLed!=null)
-    ? NODE_NAMES[data.activeLed]
-    : (running ? 'Get ready…' : 'Idle — press Start to begin');
 
   if (typeof data.count === 'number' && typeof data.target === 'number'){
     document.getElementById('liveCount').textContent = `${data.count} / ${data.target}`;
